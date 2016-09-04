@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<description>Example configuration to get you started.</description>
+	
+	<bean id = "inventoryServiceImpl" class="com.npu.orders.services.InventoryServiceImpl">
+	</bean>
+	<bean id = "taxServiceImpl" class="com.npu.orders.services.SalesTaxService">
+	</bean>
+	<bean id = "acctServiceIntlRules" class="com.npu.orders.services.AccountingServiceIntlRules">
+		<property name="salesTax" ref="taxServiceImpl" />
+	</bean>
+	
+	<bean id = "orderProc" class="com.npu.orders.services.OrderProcessor">
+		<property name="acctService" ref="acctServiceIntlRules" />
+		<property name="inventService" ref="inventoryServiceImpl" />
+	</bean>
+</beans>
