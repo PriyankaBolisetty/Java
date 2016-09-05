@@ -3,13 +3,22 @@ package com.npu.orders.domain;
 import java.util.ArrayList;
 
 public class Order {
-	private String code;
+	private String code, state;
 	private Customer customer;
 	private ArrayList<OrderItem> lstOrderItems;
-	private double subTotal, tax, total;
+	private double subTotal = 0.0, tax, total;
 	
-	public Order(String newOrderCode) {
+	public Order(String newOrderCode, String state) {
 		code = newOrderCode;
+		this.state = state;
+	}
+	
+	public String getState(){
+		return state;
+	}
+	
+	public void setState(String state){
+		this.state = state;
 	}
 	
 	public ArrayList<OrderItem> getLstOrderItems(){
@@ -40,7 +49,7 @@ public class Order {
 			lstOrderItems = new ArrayList<OrderItem>();
 			lstOrderItems.add(item);
 			subTotal += item.getProduct().getPrice() * item.getQuantity();
-			System.out.println("Each item's subtotal: " + subTotal);
+			System.out.println(item.getProduct().getName() + " subtotal: " + subTotal);
 		}
 		
 		else if(lstOrderItems != null){
@@ -51,14 +60,14 @@ public class Order {
 					newQty = item.getQuantity();
 					//Update the quantity
 					eachItem.setQuantity(originalQty + newQty);
-					subTotal += eachItem.getProduct().getPrice() * item.getQuantity();
-					System.out.println("Each item's subtotal: " + subTotal);
+					subTotal += eachItem.getProduct().getPrice() * newQty;
+					System.out.println(eachItem.getProduct().getName() + " subtotal: " + subTotal);
 					return;
 				} else{
 					//add the item
 					lstOrderItems.add(item);
 					subTotal += item.getProduct().getPrice() * item.getQuantity();
-					System.out.println("Each item's subtotal: " + subTotal);
+					System.out.println(item.getProduct().getName() + " subtotal: " + subTotal);
 					return;
 				}	 
 			}
@@ -76,7 +85,7 @@ public class Order {
 				if(eachProduct.getName().equals(product.getName())){
 					lstOrderItems.remove(eachItem);
 					subTotal -= product.getPrice() * eachItem.getQuantity();
-					System.out.println("Removed item's subtotal: " + subTotal);
+					System.out.println("Removed item " + product.getName() + " subtotal: " + subTotal);
 					return;
 				}
 			}
