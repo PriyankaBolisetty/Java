@@ -8,16 +8,12 @@ public class AccountingServiceIntlRules implements AccountingService {
 	
 	public AccountingServiceIntlRules(){}
 	
-	/*public AccountingServiceIntlRules(TaxService salesTax){
-		this.salesTax = salesTax;
-	}*/
-	
+	//Have to add this set method, when we add this as a property to other beans
 	public void setSalesTax(TaxService salesTax){
 		this.salesTax = salesTax;
 	}
 	
 	public void recordNewOrder(Order order) {
-		System.out.println("Applying International Accounting Rules");
 		return;
 	}
 	

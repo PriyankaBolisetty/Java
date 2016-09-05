@@ -18,7 +18,7 @@ public class InventoryServiceImpl implements InventoryService{
 	public void addProductsToInventory(){
 		product1 = new Product("iPhone", 600.00);
 		product2 = new Product("Jacket", 70.99);
-		product3 = new Product("Shoes", 34.50);
+		product3 = new Product("Shoes", 45.50);
 		product4 = new Product("Laptop", 1300.99);
 		product5 = new Product("Car", 11000.00);
 		
@@ -36,8 +36,21 @@ public class InventoryServiceImpl implements InventoryService{
 	}
 	
 	public void adjustInventory(Order order) {
-		//System.out.println("Applying Inventory Service Rules");
-		return;
+		ArrayList<OrderItem> orderedItems = order.getLstOrderItems();
+		int origQty, newQty;
+		
+		System.out.println("\nAdjusting Inventory");
+		System.out.println("===========================");
+		for(int i = 0; i < lstInventoryItems.size(); i++){
+			for(int j = 0; j < orderedItems.size(); j++){
+				if((lstInventoryItems.get(i).getProduct())
+						.equals((orderedItems.get(j).getProduct()))){
+					origQty = lstInventoryItems.get(i).getQuantity();
+					newQty = orderedItems.get(j).getQuantity();
+					lstInventoryItems.get(i).setQuantity(origQty - newQty);
+				}
+			}
+		}
 	}
 	
 	public void printCurrentInventory() {
