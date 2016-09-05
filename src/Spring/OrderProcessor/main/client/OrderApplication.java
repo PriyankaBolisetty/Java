@@ -1,10 +1,8 @@
 package com.npu.orders.client;
 
 import com.npu.orders.domain.*;
-import com.npu.orders.services.AccountingService;
 import com.npu.orders.services.InventoryService;
 import com.npu.orders.services.OrderProcessor;
-import com.npu.orders.services.TaxService;
 
 import java.util.ArrayList;
 
@@ -16,9 +14,7 @@ public class OrderApplication {
 		ApplicationContext container = new ClassPathXmlApplicationContext("app-context.xml");
 		Order order;
 		OrderProcessor orderProc = (OrderProcessor)container.getBean("orderProc");
-		
 		InventoryService inventService = (InventoryService)container.getBean("inventoryServiceImpl");
-		//AccountingService acctService = (AccountingService) container.getBean("acctServiceIntlRules");
 		
 		inventService.printCurrentInventory();
 		
@@ -28,13 +24,12 @@ public class OrderApplication {
 		Product product2 = new Product("Shoes", 45.50);
 		OrderItem item2 = new OrderItem(product2, 4);
 		
-		order = new Order("GSX-56789");
+		order = new Order("GSX-56789", "AZ");
 		
 		order.addItem(item1);
 		order.addItem(item2);
 		order.addItem(item1);
 		order.addItem(item1);
-		
 		order.removeProduct(product1);
 		
 		ArrayList<OrderItem> orderedItems = order.getLstOrderItems();
@@ -43,10 +38,6 @@ public class OrderApplication {
 		}
 		
 		orderProc.newOrder(order);
-		
-		//acctService.recordNewOrder(order);
-		//acctService.ad;
-		
-		//orderProc.newOrder(order);
+		inventService.printCurrentInventory();
 	}
 }
