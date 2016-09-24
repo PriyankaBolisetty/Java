@@ -1,21 +1,27 @@
-package com.jobs.gethired.domain;
+package com.inventory.orders.domain;
 
 import java.util.ArrayList;
 
 public class Order {
 	private String code, state;
+	private int id;
 	private Customer customer;
 	private ArrayList<OrderItem> lstOrderItems;
 	private double subTotal = 0.0, tax, total;
 	
-	public Order(String code, String state) {
-		this.code = code;
+	public Order(String newOrderCode, String state) {
+		code = newOrderCode;
 		this.state = state;
 	}
 	
-	public String getCode(){
-		return code;
+	public int getId() {
+		return id;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getState(){
 		return state;
 	}

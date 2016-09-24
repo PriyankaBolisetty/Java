@@ -1,8 +1,11 @@
-package com.jobs.gethired.domain;
+package com.inventory.orders.domain;
 
 public class Product {
+	private int id;
 	private String name;
 	private double price;
+	
+	public Product(){}
 	
 	public Product(String name, double price) {
 		super();
@@ -10,6 +13,14 @@ public class Product {
 		this.price = price;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
